@@ -3,15 +3,22 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+#for testing purposes
+from selenium.webdriver.chrome.options import Options
 import pandas as pd
 import time
 
 from config import user_name, password,chromedriver_location
 
+# For testing
+chrome_options = Options()
+chrome_options.add_experimental_option("detach", True)
+
+
 print(chromedriver_location)
 
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver = webdriver.Chrome(chrome_options = chrome_options, service=Service(ChromeDriverManager().install()))
 
 driver.get('https://linkedin.com/uas/login')
 
@@ -19,3 +26,6 @@ driver.get('https://linkedin.com/uas/login')
 time.sleep(5)
 
 print(user_name)
+
+
+
