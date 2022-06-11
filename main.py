@@ -1,10 +1,21 @@
+from lib2to3.pgen2 import driver
 from bs4 import BeautifulSoup
-import requests
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
+import time
 
-html_text = requests.get('https://www.linkedin.com/jobs/search/?distance=25.0&f_WT=2&geoId=103644278&keywords=data%20analyst').text
+from config import user_name, password,chromedriver_location
 
-soup = BeautifulSoup(html_text,'lxml')
-job = soup.find('a',id='ember1863')
+print(chromedriver_location)
 
-print(job)
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+driver.get('https://linkedin.com/uas/login')
+
+#waiting for the page to load
+time.sleep(5)
+
+print(user_name)
