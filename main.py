@@ -11,7 +11,10 @@ import time
 
 from config import user_name, password,chromedriver_location
 
-# For testing
+
+# Logging in
+
+# For testing, keeping browser open. 
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
@@ -36,19 +39,15 @@ password_input.send_keys(password)
 driver.find_element_by_xpath('//*[@id="organic-div"]/form/div[3]/button').click()
 
 
-#confirm email 
-# driver.find_element_by_xpath('//*[@id="ember26"]/button[1]').click()
 
-#jobs URL
+# Going to Jobs URL 
 jobs_url = 'https://www.linkedin.com/jobs/search/?distance=25.0&f_WT=2&geoId=103644278&keywords=data%20analyst'
 driver.get(jobs_url)
 
 #html analysis
 html = driver.page_source
-soup = BeautifulSoup(html, 'lxml').text
+soup = BeautifulSoup(html, 'lxml')
 #using xpath to find the element. 
 dom = etree.HTML(soup)
-job_title = soup.find("div", {"id": "ember294"}).find('a')
-# job_title = soup.find('div',{'class':'disabled ember-view job-card-container__link job-card-list__title'})
-# job_title = job_title.get_text().strip()
-print(job_title)
+
+print(soup)
